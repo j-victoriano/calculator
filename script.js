@@ -16,11 +16,6 @@ const divide = (a,b) => {
 }
 console.log(divide(6,2)); //3
 
-const num1 = 0;
-const num2 = 0;
-const operation = '';
-
-
 const operate = (a, operator , b) => {
     switch(operator) {
         case '+':
@@ -40,10 +35,11 @@ const operate = (a, operator , b) => {
 };
 
 //Button Selection
-const button = document.querySelectorAll('input');
+const button = document.querySelectorAll('input[type="button"]');
 button.forEach(btn => {
     btn.classList = "operation";
 });
+
 
 
 
