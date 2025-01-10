@@ -36,10 +36,17 @@ const operate = (a, operator , b) => {
 
 //Button Selection
 const button = document.querySelectorAll('input[type="button"]');
+const input = document.querySelector('input[type="text"]');
 button.forEach(btn => {
     btn.classList = "operation";
+    //On Click, Add the value to form
+    btn.addEventListener('click', e =>{
+        // alert("oh hello!");
+        // console.log("i hope this is working")
+        let buttonValue = btn.value;
+        input.value += buttonValue;
+        console.log(input.value);
+    })
 });
-
-
 
 
