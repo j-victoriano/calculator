@@ -20,6 +20,7 @@ const num1 = 0;
 const num2 = 0;
 const operation = '';
 
+
 const operate = (a, operator , b) => {
     switch(operator) {
         case '+':
@@ -38,12 +39,11 @@ const operate = (a, operator , b) => {
     };
 };
 
-console.log(operate(1,'+',2));//3
-console.log(operate(2,'-',1));//1
-console.log(operate(3,'*',5));//15
-console.log(operate(10,'/',2));//5
-console.log(operate(12,'/',0));//Dividing by zero lol
-console.log(operate(1,'x',2));//Invalid
+//Button Selection
+const button = document.querySelectorAll('input');
+button.forEach(btn => {
+    btn.classList = "operation";
+});
 
 
 
