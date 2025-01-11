@@ -43,6 +43,27 @@ const operate = (a, operator , b) => {
 //Button Selection
 const button = document.querySelectorAll('input[type="button"]');
 const input = document.querySelector('input[type="text"]');
+document.addEventListener('keydown', e => {
+    if(e.key === 'Shift'){
+        console.log("ignoring shift");
+        return;
+    }
+    if(e.key === 'Backspace') {
+        clear();
+    } else if (validOperator.includes(e.key)){
+        console.log(e.key);
+        getOperator(e.key);
+    } else if (e.key === "Enter") {
+        calculate()
+    } else {
+        console.log(typeof e.key);
+        let num = e.key;
+        console.log(`This is input value: ${num}`);
+        getNumber(num);
+    }
+});
+
+const validOperator = ['+', '-', '/', '%', '*'];
 
 const isOperator = (str) => {
     return str === '+' || str === '%' || str === '-' || str ==='*'
@@ -81,7 +102,8 @@ const getNumber = (num) => {
         secondNumber = Number(secondNumArray.join(''));
         input.value = secondNumber;
     }
-}
+    console.log(`First Number: ${firstNumber} \nSecond Number: ${secondNumber}`);
+};
 
 const getOperator = (op) => {
     step = 2;
@@ -115,6 +137,7 @@ const changeSign = () => {
 
 
 
+
 button.forEach(btn => {
     btn.classList = "operation";
     //On Click, Add the value to form
@@ -131,7 +154,6 @@ button.forEach(btn => {
                 document.getElementById('decimal').disabled = true;
             }
             getNumber(btnValue);
-            console.log(`First Number: ${firstNumber} \nSecond Number: ${secondNumber}`);
         } else if (isOperator(btnValue)){
             getOperator(btnValue);
             if(step === 2 && secondNumber != undefined) calculate();
