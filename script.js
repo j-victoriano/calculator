@@ -13,12 +13,12 @@ const modulus = (a,b) => {
 const multiply = (a,b) => {
     return a * b;
 }
-console.log(multiply(2,3)); //6
+// console.log(multiply(2,3)); //6
 
 const divide = (a,b) => {
     return a/b;
 }
-console.log(divide(6,2)); //3
+// console.log(divide(6,2)); //3
 
 const operate = (a, operator , b) => {
     switch(operator) {
@@ -57,6 +57,10 @@ const isEquals = (btn) => {
     return btn === '=';
 }
 
+const isSign = (btn) => {
+    return btn === '+/-';
+}
+
 let firstNumber;
 let secondNumber;
 let operator;
@@ -82,7 +86,6 @@ const getNumber = (num) => {
 const getOperator = (op) => {
     step = 2;
     operator = op;
-    document.getElementById('decimal').disabled = false;
 }
 
 const clear = () => {
@@ -97,10 +100,17 @@ const clear = () => {
 }
 
 //Should clear second number to keep chaining operations
-const equate = () => {
+const calculate = () => {
+    result = operate(firstNumber, operator, secondNumber);
     firstNumber = result;
     secondNumber = null;
     secondNumArray = [];
+    input.value = result;
+}
+
+const changeSign = () => {
+    firstNumber *= -1;
+    input.value = firstNumber;
 }
 
 
@@ -112,8 +122,11 @@ button.forEach(btn => {
         // alert("oh hello!");
         // console.log("i hope this is working")
         let btnValue = btn.value
-        if (!isOperator(btnValue) && !isClear(btnValue) && !isEquals(btnValue)){
-            console.log("This is not operator or clear btn");
+        if (!isOperator(btnValue) 
+            && !isClear(btnValue) 
+            && !isEquals(btnValue)
+            && !isSign(btnValue)){
+            console.log("This is a number");
             if(btn.value === '.'){
                 document.getElementById('decimal').disabled = true;
             }
@@ -121,14 +134,16 @@ button.forEach(btn => {
             console.log(`First Number: ${firstNumber} \nSecond Number: ${secondNumber}`);
         } else if (isOperator(btnValue)){
             getOperator(btnValue);
+            if(step === 2 && secondNumber != undefined) calculate();
+            document.getElementById('decimal').disabled = false;
             console.log(`Operator: ${operator}`);
         } else if (isClear(btnValue)){
             clear();
+        } else if (isSign(btnValue)) {
+            changeSign();
         } else if (isEquals(btnValue)){
-            result = operate(firstNumber, operator, secondNumber);
+            calculate();
             console.log(result);
-            equate();
-            input.value = result;
         }
     })
 });

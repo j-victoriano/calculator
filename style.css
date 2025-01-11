@@ -17,15 +17,15 @@ body {
 }
 
 input[type="button"].operation {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 10px;
 }
 
 input[type="text"] {
     text-align: end;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     flex: 1;
     font-size: 35px;
     box-sizing: border-box;
